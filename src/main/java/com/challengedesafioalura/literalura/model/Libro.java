@@ -1,25 +1,56 @@
 package com.challengedesafioalura.literalura.model;
 
 
+import jakarta.persistence.*;
 
 
-import java.util.List;
-import java.util.stream.Collectors;
 
+@Entity
+@Table(name = "libros")
 public class Libro {
 
-     private String titulo;
-     private List<String> nombreAutor;
-     private List<String>  idiomas;
-     private  int numeroDescargas;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long Id;
+    @Column(unique = true)
+    private String titulo;
+    private String nombreAutor;
+    private String idiomas;
+    private  int numeroDescargas;
+    @ManyToOne
+    private Autor autor;
 
 
-    public Libro(DatosLibro datosLibro) {
+    public Libro() {
+    }
+
+    public Libro(DatosLibro datosLibro, Autor autor) {
         this.titulo = datosLibro.titulo();
-        this.nombreAutor = datosLibro.autor().stream().map(DatosAutor::nombre)
-                .collect(Collectors.toList());
-        this.idiomas = datosLibro.idiomas();
+        this.nombreAutor = autor.getNombre();
+        this.autor = autor;
+        this.idiomas = datosLibro.idiomas().get(0);
         this.numeroDescargas = datosLibro.numeroDeDescargas();
+    }
+
+
+
+
+    @Override
+    public String toString() {
+        return "******************************************************************" + "\n" +
+                "   Titulo: " + titulo  +  "\n" +
+                "   Nombre autor: " + nombreAutor  + "\n" +
+                "   Idioma:  " + idiomas + "\n" +
+                "   Numero descargas:  " + numeroDescargas + "\n" +
+                "******************************************************************";
+    }
+
+    public Long getId() {
+        return Id;
+    }
+
+    public void setId(Long id) {
+        Id = id;
     }
 
     public String getTitulo() {
@@ -30,19 +61,19 @@ public class Libro {
         this.titulo = titulo;
     }
 
-    public List<String> getNombreAutor() {
+    public String getNombreAutor() {
         return nombreAutor;
     }
 
-    public void setNombreAutor(List<String> nombreAutor) {
+    public void setNombreAutor(String nombreAutor) {
         this.nombreAutor = nombreAutor;
     }
 
-    public List<String> getIdiomas() {
+    public String getIdiomas() {
         return idiomas;
     }
 
-    public void setIdiomas(List<String> idiomas) {
+    public void setIdiomas(String idiomas) {
         this.idiomas = idiomas;
     }
 
@@ -54,13 +85,11 @@ public class Libro {
         this.numeroDescargas = numeroDescargas;
     }
 
-    @Override
-    public String toString() {
-        return "******************************************************************" + "\n" +
-                              "   titulo='" + titulo + '\'' +  "\n" +
-                              "   nombreAutor='" + nombreAutor + '\'' + "\n" +
-                              "   idiomas=" + idiomas + "\n" +
-                               "   numeroDescargas=" + numeroDescargas + "\n" +
-               "******************************************************************";
+    public Autor getAutor() {
+        return autor;
+    }
+
+    public void setAutor(Autor autor) {
+        this.autor = autor;
     }
 }

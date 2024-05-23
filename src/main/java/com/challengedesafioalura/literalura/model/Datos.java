@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.util.List;
 
-//mapeo datos del objeto results del api
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public record Datos(
@@ -14,9 +13,3 @@ public record Datos(
 ) {
 
 }
-
-
-
-
-
-
