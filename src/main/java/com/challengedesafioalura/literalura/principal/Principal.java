@@ -132,11 +132,7 @@ public class Principal {
             Libro libro = null;
             Libro libroDb = libroRepositorio.findByTitulo(datosLibro.titulo());
             if (libroDb != null) {
-                System.out.println(" " + "\n" +
-                        
-            "********************* El libro  " +  libroDb.getTitulo().toUpperCase() + " ya existe en la base de datos  *******************"  + "\n" +
-
-             " " );
+                System.out.println(libroDb );
             } else {
                 Autor autorDb = autorRepositorio.findByNombre(datosLibro.autor().get(0).nombre());
                 if (autorDb == null) {
@@ -152,7 +148,7 @@ public class Principal {
         } else {
             System.out.println("""
                 
-        ********************** El libro no existe en la base datos web MODB   ***********************
+        ********************** El libro no existe en la base datos web de Gutendex   ***********************
                 
         """);
         }
