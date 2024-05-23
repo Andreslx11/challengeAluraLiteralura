@@ -6,15 +6,15 @@
  
 
  Menu:
-                                          ELija La opción a través de su número:           
-                        *                     1- buscar libro por título                       *
-                        *                     2- Listar libros registrados                     *
-                        *                     3- Listar autores registrados                    *
-                        *                     4- Listar autores vivos en un determinado año    *
-                        *                     5- Listar libros por idioma                      *                                                                                                        *
-                        *                     0- salir 
-
- ## Tecnologias usadas
+    ELija La opción a través de su número:           
+    1- buscar libro por título                       
+    2- Listar libros registrados                     
+    3- Listar autores registrados                    
+    4- Listar autores vivos en un determinado año    
+    5- Listar libros por idioma                                                                                                                     
+    0- salir 
+ 
+ #### Tecnologias usadas
  - Lenguage de programación: java
  - Framework: sprint boot
  - Gestor de dependecias : Maven
@@ -25,7 +25,7 @@
     jackson-databind
 
 
-# Estructura del codigo:
+#### Estructura del codigo:
 
 Paquete model:
 Tiene 2 clases autor y libro que son a su vez las entidades de base datos local, tiene 3 record para poder mapear
@@ -46,7 +46,7 @@ Paquete main:
 En este se hace la inyeción de dependencias para los dos repositorios de libro y autor, se ejecuta la app.
 
 
-Por fin gracias al Señor Jesús!
+##Por fin gracias al Señor Jesús!
 
-Este proyecto fue hecho para el challenge alura Literalura
+##Este proyecto fue hecho para el challenge alura Literalura
    
