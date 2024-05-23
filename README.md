@@ -6,7 +6,8 @@
  
 
  Menu:
-    ELija La opción a través de su número:           
+ 
+ ELija La opción a través de su número:           
     1- buscar libro por título                       
     2- Listar libros registrados                     
     3- Listar autores registrados                    
@@ -46,7 +47,7 @@ Paquete main:
 En este se hace la inyeción de dependencias para los dos repositorios de libro y autor, se ejecuta la app.
 
 
-##Por fin gracias al Señor Jesús!
+## Por fin gracias al Señor Jesús!
 
-##Este proyecto fue hecho para el challenge alura Literalura
+## Este proyecto fue hecho para el challenge alura Literalura
    
