@@ -18,5 +18,9 @@ public interface LibroRepository extends JpaRepository<Libro, Long> {
     @Query("SELECT COUNT(l) FROM Libro l WHERE l.idiomas = :idiomas")
     int countByLanguage(@Param("idiomas") String idiomas);
 
+    List<Libro> findTop10ByOrderByNumeroDescargasDesc();
+
+    List<Libro> findByAutor(Autor  autor);
+
 
 }

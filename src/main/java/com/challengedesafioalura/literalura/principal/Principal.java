@@ -44,7 +44,10 @@ public class Principal {
                                             *                     2- Listar libros registrados                     * 
                                             *                     3- Listar autores registrados                    *  
                                             *                     4- Listar autores vivos en un determinado año    *
-                                            *                     5- Listar libros por idioma                      *                                                                                                        *  
+                                            *                     5- Listar libros por idioma                      *
+                                            *                     6- Top 10 libros mas descargados en base         *
+                                            *                        datos local                                   *     
+                                            *                     7- Consultar autor por nombre                    *  
                                             *                     0- salir                                         *
                                             *                                                                      *                                                                       
                     *****************************************************************************************************************************
@@ -73,6 +76,13 @@ public class Principal {
                     case 5:
                         listarLibrosPorIdioma();
                         break;
+                    case 6:
+                        Top10LibrosMasDescargadosBaseDatosLocal();
+                        break;
+                    case 7:
+                        ConsultarAutorPorNombre();
+                        break;
+
                     case 0:
                         System.out.println("""
                                 
@@ -134,7 +144,7 @@ public class Principal {
             if (libroDb != null) {
                 System.out.println(libroDb );
             } else {
-                Autor autorDb = autorRepositorio.findByNombre(datosLibro.autor().get(0).nombre());
+                Autor autorDb = autorRepositorio.findByNombreIgnoreCase(datosLibro.autor().get(0).nombre());
                 if (autorDb == null) {
                     Autor autor = new Autor(datosAutor);
                     autor = autorRepositorio.save(autor);
@@ -281,5 +291,33 @@ public class Principal {
       }
 
 
+     private void Top10LibrosMasDescargadosBaseDatosLocal() {
+        var top10LibrosDescargados = libroRepositorio.findTop10ByOrderByNumeroDescargasDesc();
+         top10LibrosDescargados.forEach(System.out::println);
 
-  }
+    }
+
+    private void ConsultarAutorPorNombre() {
+        System.out.println("Ingresa el nombre del autor que desea consultar ");
+        var nombreAutor = teclado.nextLine();
+        var autorPorNombre = autorRepositorio.findByNombreIgnoreCase(nombreAutor);
+        if(autorPorNombre != null) {
+            var  ID_AUTOR = autorPorNombre.getId();
+            var libroEscritosPorEseAutor = libroRepositorio.findByAutor(autorPorNombre);
+            System.out.println( "************************************************************************************"  + "\n" +
+                                "**********************************     Datos autor:      ****************************"   + "\n" +
+                                 autorPorNombre + "\n" +
+                                 "" + "\n" +
+                                "***********************  Libros escritos por este autor: ****************************"
+                    );
+            libroEscritosPorEseAutor.stream()
+                    .sorted(Comparator.comparing(Libro::getNumeroDescargas).reversed())
+                    .forEach(libro -> System.out.println(libro));
+
+        }
+
+    }
+
+
+
+}
